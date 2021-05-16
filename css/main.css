@@ -2736,3 +2736,9 @@ ul.breadcrumb li:last-child {
 .post-title-link {
   font-size: 14px;
 }
+.posts-expand .post-content .post-header {
+  margin-bottom: 10px;
+}
+.posts-expand .post-content .post-eof {
+  margin: 25px auto 15px;
+}
