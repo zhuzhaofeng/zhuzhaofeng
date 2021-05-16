@@ -131,20 +131,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -173,6 +173,80 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/16/java-mybatis-plus-generator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="zhuzhaofeng">
+      <meta itemprop="description" content="怪咖村长的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhuzhaofeng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/05/16/java-mybatis-plus-generator/" class="post-title-link" itemprop="url">MyBatis Plus 代码生成器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-05-16 22:34 / 修改时间：22:36" itemprop="dateCreated datePublished" datetime="2021-05-16T22:34:39+08:00">2021-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.DbType;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.FieldFill;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.IdType;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.generator.*;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.generator.config.*;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.generator.config.po.TableFill;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CodeGenerator</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * 读取控制台内容</span></span><br><span class="line"><span class="comment">     * &lt;/p&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">scanner</span><span class="params">(String tip)</span> </span>&#123;</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        StringBuilder help = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        help.append(<span class="string">&quot;请输入&quot;</span> + tip + <span class="string">&quot;：&quot;</span>);</span><br><span class="line">        System.out.println(help.toString());</span><br><span class="line">        <span class="keyword">if</span> (scanner.hasNext()) &#123;</span><br><span class="line">            String ipt = scanner.next();</span><br><span class="line">            <span class="keyword">if</span> (StringUtils.isNotBlank(ipt)) &#123;</span><br><span class="line">                <span class="keyword">return</span> ipt;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> MybatisPlusException(<span class="string">&quot;请输入正确的&quot;</span> + tip + <span class="string">&quot;！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 代码生成器</span></span><br><span class="line">        AutoGenerator mpg = <span class="keyword">new</span> AutoGenerator();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 全局配置</span></span><br><span class="line">        GlobalConfig gc = <span class="keyword">new</span> GlobalConfig();</span><br><span class="line">        String projectPath = System.getProperty(<span class="string">&quot;user.dir&quot;</span>);</span><br><span class="line">        gc.setOutputDir(projectPath + <span class="string">&quot;/src/main/java&quot;</span>);</span><br><span class="line">        gc.setAuthor(<span class="string">&quot;zhuzhaofeng@aliyun.com&quot;</span>);</span><br><span class="line">        gc.setOpen(<span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">// 去除Service 前缀 I</span></span><br><span class="line">        gc.setServiceName(<span class="string">&quot;%sService&quot;</span>);</span><br><span class="line">        gc.setIdType(IdType.ASSIGN_ID);</span><br><span class="line">        <span class="comment">// 实体属性 Swagger2 注解</span></span><br><span class="line">        <span class="comment">// gc.setSwagger2(true);</span></span><br><span class="line">        mpg.setGlobalConfig(gc);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数据源配置</span></span><br><span class="line">        DataSourceConfig dsc = <span class="keyword">new</span> DataSourceConfig();</span><br><span class="line">        dsc.setUrl(<span class="string">&quot;jdbc:mysql://localhost:3306/mybatis_plus?useUnicode=true&amp;useSSL=false&amp;characterEncoding=utf8&quot;</span>);</span><br><span class="line">        dsc.setSchemaName(<span class="string">&quot;public&quot;</span>);</span><br><span class="line">        dsc.setDbType(DbType.MYSQL);</span><br><span class="line">        dsc.setDriverName(<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);</span><br><span class="line">        dsc.setUsername(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">        dsc.setPassword(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">        mpg.setDataSource(dsc);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 包配置</span></span><br><span class="line">        PackageConfig pc = <span class="keyword">new</span> PackageConfig();</span><br><span class="line">        pc.setModuleName(scanner(<span class="string">&quot;请输入模块名:&quot;</span>));</span><br><span class="line">        pc.setParent(<span class="string">&quot;com.example&quot;</span>);</span><br><span class="line">        pc.setEntity(<span class="string">&quot;pojo&quot;</span>);</span><br><span class="line">        pc.setServiceImpl(<span class="string">&quot;services.impl&quot;</span>);</span><br><span class="line">        pc.setController(<span class="string">&quot;controller&quot;</span>);</span><br><span class="line">        pc.setMapper(<span class="string">&quot;mapper&quot;</span>);</span><br><span class="line">        mpg.setPackageInfo(pc);</span><br><span class="line">        <span class="comment">// 策略配置</span></span><br><span class="line">        StrategyConfig strategy = <span class="keyword">new</span> StrategyConfig();</span><br><span class="line">        strategy.setNaming(NamingStrategy.underline_to_camel);</span><br><span class="line">        strategy.setColumnNaming(NamingStrategy.underline_to_camel);</span><br><span class="line">        strategy.setEntityLombokModel(<span class="keyword">true</span>);</span><br><span class="line">        strategy.setRestControllerStyle(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// 写于父类中的公共字段</span></span><br><span class="line">        <span class="comment">// strategy.setSuperEntityColumns(&quot;id&quot;, &quot;create_time&quot;,&quot;update_time&quot;, &quot;is_deleted&quot;, &quot;version&quot;);</span></span><br><span class="line">        strategy.setInclude(scanner(<span class="string">&quot;请输入需要生成的表名，多个英文逗号分割: &quot;</span>).split(<span class="string">&quot;,&quot;</span>));</span><br><span class="line">        strategy.setControllerMappingHyphenStyle(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// 自动添加lombok</span></span><br><span class="line">        strategy.setEntityLombokModel(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 自动填充字段设置</span></span><br><span class="line">        TableFill createTime = <span class="keyword">new</span> TableFill(<span class="string">&quot;create_time&quot;</span>, FieldFill.INSERT);</span><br><span class="line">        TableFill updateTime = <span class="keyword">new</span> TableFill(<span class="string">&quot;update_time&quot;</span>, FieldFill.INSERT_UPDATE);</span><br><span class="line">        ArrayList&lt;TableFill&gt; tableFills = <span class="keyword">new</span> ArrayList&lt;TableFill&gt;();</span><br><span class="line">        tableFills.add(createTime);</span><br><span class="line">        tableFills.add(updateTime);</span><br><span class="line">        strategy.setTableFillList(tableFills);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 逻辑删除字段设置</span></span><br><span class="line">        strategy.setLogicDeleteFieldName(<span class="string">&quot;is_deleted&quot;</span>);</span><br><span class="line">        <span class="comment">// 乐观锁字段设置</span></span><br><span class="line">        strategy.setVersionFieldName(<span class="string">&quot;version&quot;</span>);</span><br><span class="line">        strategy.setTablePrefix(pc.getModuleName() + <span class="string">&quot;_&quot;</span>);</span><br><span class="line">        mpg.setStrategy(strategy);</span><br><span class="line"></span><br><span class="line">        mpg.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
