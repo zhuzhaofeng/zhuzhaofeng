@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;example.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="参考文章 Flutter 监听键盘打开或者关闭 flutter 中如何监听键盘弹出关闭">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter监听键盘高度变化">
+<meta property="og:url" content="http://example.com/2021/05/16/flutter-watch-keyboard-height/index.html">
+<meta property="og:site_name" content="zhuzhaofeng">
+<meta property="og:description" content="参考文章 Flutter 监听键盘打开或者关闭 flutter 中如何监听键盘弹出关闭">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-16T13:48:53.000Z">
+<meta property="article:modified_time" content="2021-05-16T13:53:23.606Z">
+<meta property="article:author" content="zhuzhaofeng">
+<meta property="article:tag" content="Flutter">
+<meta property="article:tag" content="keyboard">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/05/16/flutter-watch-keyboard-height/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;05&#x2F;16&#x2F;flutter-watch-keyboard-height&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;05&#x2F;16&#x2F;flutter-watch-keyboard-height&#x2F;&quot;,&quot;title&quot;:&quot;Flutter监听键盘高度变化&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Flutter监听键盘高度变化 | zhuzhaofeng</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">zhuzhaofeng</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">怪咖村长</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">1.</span> <span class="nav-text">参考文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">zhuzhaofeng</p>
+  <div class="site-description" itemprop="description">怪咖村长的个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/16/flutter-watch-keyboard-height/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="zhuzhaofeng">
+      <meta itemprop="description" content="怪咖村长的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhuzhaofeng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flutter监听键盘高度变化
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-05-16 21:48 / 修改时间：21:53" itemprop="dateCreated datePublished" datetime="2021-05-16T21:48:53+08:00">2021-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6875517831148994574">Flutter 监听键盘打开或者关闭</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022495736">flutter 中如何监听键盘弹出关闭</a></li>
+</ul>
+<span id="more"></span>
+
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/cupertino.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:flutter/material.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:habits_ltd/utils/constant/colors.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:habits_ltd/utils/index.dart&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomCommentDialog</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  CustomCommentDialog(&#123;Key key&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _CustomCommentDialogState createState() =&gt; _CustomCommentDialogState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_CustomCommentDialogState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">CustomCommentDialog</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">with</span> <span class="title">WidgetsBindingObserver</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 输入框的焦点实例</span></span><br><span class="line">  FocusNode _focusNode;</span><br><span class="line">  <span class="comment">// 当前键盘是否是激活状态</span></span><br><span class="line">  <span class="built_in">bool</span> isKeyboardActived = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> initState() &#123;</span><br><span class="line">    <span class="keyword">super</span>.initState();</span><br><span class="line">    _focusNode = FocusNode();</span><br><span class="line">    <span class="comment">// 监听输入框焦点变化</span></span><br><span class="line">    _focusNode.addListener(_onFocus);</span><br><span class="line">    <span class="comment">// 创建一个界面变化的观察者</span></span><br><span class="line">    WidgetsBinding.instance.addObserver(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> didChangeMetrics() &#123;</span><br><span class="line">    <span class="keyword">super</span>.didChangeMetrics();</span><br><span class="line">    WidgetsBinding.instance.addPostFrameCallback((_) &#123;</span><br><span class="line">      <span class="keyword">if</span> (MediaQuery.of(context).viewInsets.bottom == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;键盘关闭&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (isKeyboardActived) &#123;</span><br><span class="line">          isKeyboardActived = <span class="keyword">false</span>;</span><br><span class="line">          <span class="comment">// 使输入框失去焦点</span></span><br><span class="line">          _focusNode.unfocus();</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;键盘打开&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!isKeyboardActived) &#123;</span><br><span class="line">          isKeyboardActived = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 既然有监听当然也要有卸载，防止内存泄漏嘛</span></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> dispose() &#123;</span><br><span class="line">    <span class="keyword">super</span>.dispose();</span><br><span class="line">    _focusNode.dispose();</span><br><span class="line">    WidgetsBinding.instance.removeObserver(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 焦点变化时触发的函数</span></span><br><span class="line">  _onFocus() &#123;</span><br><span class="line">    <span class="keyword">if</span> (_focusNode.hasFocus) &#123;</span><br><span class="line">      <span class="comment">// 聚焦时候的操作</span></span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 失去焦点时候的操作</span></span><br><span class="line">    isKeyboardActived = <span class="keyword">false</span>;</span><br><span class="line">    Navigator.pop(context);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Scaffold(</span><br><span class="line">      backgroundColor: Colors.transparent,</span><br><span class="line">      body: GestureDetector(</span><br><span class="line">        behavior: HitTestBehavior.translucent,</span><br><span class="line">        onTap: () &#123;</span><br><span class="line">          <span class="comment">// 点击上方蒙版 关闭键盘</span></span><br><span class="line">          FocusScope.of(context).requestFocus(FocusNode());</span><br><span class="line">        &#125;,</span><br><span class="line">        child: _buildCommentContainer(context),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Column _buildCommentContainer(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Column(</span><br><span class="line">      crossAxisAlignment: CrossAxisAlignment.stretch,</span><br><span class="line">      children: [</span><br><span class="line">        Spacer(),</span><br><span class="line">        Container(</span><br><span class="line">          padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">12.0</span>),</span><br><span class="line">          color: isDarkMode(context) ? Colors.black : Colors.white,</span><br><span class="line">          child: Row(</span><br><span class="line">            crossAxisAlignment: CrossAxisAlignment.center,</span><br><span class="line">            children: [</span><br><span class="line">              Expanded(</span><br><span class="line">                child: CupertinoTextField(</span><br><span class="line">                  minLines: <span class="number">1</span>,</span><br><span class="line">                  maxLines: <span class="number">5</span>,</span><br><span class="line">                  maxLength: <span class="number">300</span>,</span><br><span class="line">                  autofocus: <span class="keyword">true</span>,</span><br><span class="line">                  focusNode: _focusNode,</span><br><span class="line">                  padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">12.0</span>),</span><br><span class="line">                  textInputAction: TextInputAction.newline,</span><br><span class="line">                  clearButtonMode: OverlayVisibilityMode.editing,</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br><span class="line">              SizedBox(width: <span class="number">12.0</span>),</span><br><span class="line">              CupertinoButton(</span><br><span class="line">                color: ConstantColors.primary,</span><br><span class="line">                padding: <span class="keyword">const</span> EdgeInsets.symmetric(</span><br><span class="line">                  horizontal: <span class="number">12.0</span>,</span><br><span class="line">                  vertical: <span class="number">4.0</span>,</span><br><span class="line">                ),</span><br><span class="line">                child: Text(<span class="string">&#x27;发送&#x27;</span>),</span><br><span class="line">                onPressed: () &#123;&#125;,</span><br><span class="line">              )</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br><span class="line">        )</span><br><span class="line">      ],</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Flutter/" rel="tag"># Flutter</a>
+              <a href="/tags/keyboard/" rel="tag"># keyboard</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/05/16/flutter-fluwx/" rel="prev" title="Flutter 对接 Fluwx">
+                  <i class="fa fa-chevron-left"></i> Flutter 对接 Fluwx
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/05/16/flutter-textfield-copy-paste-en/" rel="next" title="解决长按 TextField 出现英文（复制粘贴）问题">
+                  解决长按 TextField 出现英文（复制粘贴）问题 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-copyright"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhuzhaofeng</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
